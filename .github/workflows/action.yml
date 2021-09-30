@@ -65,5 +65,8 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          build-args: |
+            OPENJDK_TAG=${{ matrix.OPENJDK_TAG }}
+            SBT_VERSION=${{ matrix.SBT_VERSION }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.OPENJDK_TAG }}-${{ matrix.SBT_VERSION }}
           labels: ${{ steps.meta.outputs.labels }}
